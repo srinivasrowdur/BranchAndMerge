@@ -1,0 +1,71 @@
+default_platform(:ios)
+platform :ios do
+desc "Run Tests & Increase Build number"
+  lane :oncommit do
+    scan(scheme: "BranchAndMerge") # Name of the scema to be tested
+    increment_build_number
+  end
+
+  desc "Run Tests & Increase Build number and update patch version number"
+  lane :onpatchmerge do
+    scan(scheme: "BranchAndMerge") # Name of the scema to be tested
+    increment_build_number
+    increment_version_number_in_xcodeproj
+    while (git_tag_exists(tag: "p"+get_version_number_from_xcodeproj(scheme: "BranchAndMerge", build_configuration_name: "Release"), remote: true )) do
+      if(git_tag_exists(tag: "v"+get_version_number_from_xcodeproj(scheme: "BranchAndMerge", build_configuration_name: "Release"), remote: true ))
+
+        increment_version_number_in_xcodeproj(
+          bump_type: 'minor' # Automatically increment minor version number
+        )
+      else
+        increment_version_number_in_xcodeproj
+      end
+    end
+    add_git_tag( tag: "p"+get_version_number_from_xcodeproj(scheme: "BranchAndMerge", build_configuration_name: "Release"))
+   # version =  get_version_number_from_xcodeproj(scheme: "ActionOne", build_configuration_name: "Release") 
+   push_to_git_remote(
+    remote: "origin",         # optional, default: "origin"
+    local_branch: "develop",  # optional, aliased by "branch", default is set to current branch
+    remote_branch: "develop", # optional, default is set to local_branch
+  )
+     
+  end
+
+  desc "Run Tests & Increase Build number and update Minor version number"
+  lane :onminormerge do
+    scan(scheme: "BranchAndMerge") # Name of the scema to be tested
+    increment_build_number
+    increment_version_number_in_xcodeproj(
+      bump_type: 'minor' # Automatically increment minor version number
+    )
+  end
+
+  desc "Run Tests & Increase Build number and update Major version number"
+  lane :onmajormerge do
+    scan(scheme: "BranchAndMerge") # Name of the scema to be tested
+    increment_build_number
+    increment_version_number_in_xcodeproj(
+      bump_type: 'major' # Automatically increment major version number
+    )
+  end
+
+  desc "Increment patch version"
+  lane :incrementpatch do
+    increment_version_number_in_xcodeproj
+  end
+
+  desc "Increment minor version"
+  lane :incrementminor do
+    increment_version_number_in_xcodeproj(
+      bump_type: 'minor' # Automatically increment minor version number
+    )
+  end
+
+  desc "Increment Major version"
+  lane :incrementmajor do
+    increment_version_number_in_xcodeproj(
+      bump_type: 'major' # Automatically increment major version number
+    )
+  end
+
+end
