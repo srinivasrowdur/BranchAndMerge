@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='BranchAndMergeTests.xctest' tests='8' failures='0'>
+  <testsuite name='BranchAndMergeUITests.BranchAndMergeUITests' tests='2' failures='0'>
+    <testcase classname='BranchAndMergeUITests.BranchAndMergeUITests' name='testExample' time='5.576'/>
+    <testcase classname='BranchAndMergeUITests.BranchAndMergeUITests' name='testLaunchPerformance' time='86.340'/>
+  </testsuite>
+  <testsuite name='BranchAndMergeUITests.BranchAndMergeUITestsLaunchTests' tests='4' failures='0'>
+    <testcase classname='BranchAndMergeUITests.BranchAndMergeUITestsLaunchTests' name='testLaunch' time='5.769'/>
+    <testcase classname='BranchAndMergeUITests.BranchAndMergeUITestsLaunchTests' name='testLaunch' time='7.696'/>
+    <testcase classname='BranchAndMergeUITests.BranchAndMergeUITestsLaunchTests' name='testLaunch' time='6.046'/>
+    <testcase classname='BranchAndMergeUITests.BranchAndMergeUITestsLaunchTests' name='testLaunch' time='7.486'/>
+  </testsuite>
+  <testsuite name='BranchAndMergeTests.BranchAndMergeTests' tests='2' failures='0'>
+    <testcase classname='BranchAndMergeTests.BranchAndMergeTests' name='testExample' time='0.005'/>
+    <testcase classname='BranchAndMergeTests.BranchAndMergeTests' name='testPerformanceExample' time='0.269'/>
+  </testsuite>
+</testsuites>
